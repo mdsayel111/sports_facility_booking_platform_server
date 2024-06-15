@@ -1,6 +1,6 @@
 import express from "express";
 import authRouter from "../modules/auth/auth.router";
-import facilityRouter from "../modules/facility/facility.route";
+import facilityRouter from "../modules/facility/facility.router";
 
 // /api router
 const router = express.Router();
