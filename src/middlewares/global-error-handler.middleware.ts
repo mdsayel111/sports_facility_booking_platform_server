@@ -19,7 +19,6 @@ const globalErrorHandleMiddleware: ErrorRequestHandler = (
   res,
   next,
 ) => {
-
   // default errObj
   let errObj: TErrorObj = {
     status: 500,
@@ -37,7 +36,6 @@ const globalErrorHandleMiddleware: ErrorRequestHandler = (
 
   // if error comes from zod validation
   if (err instanceof ZodError) {
-
     // pass err to zodErrorHandler function
     newErrorObj = zodErrorHandler(err);
   }
@@ -68,12 +66,12 @@ const globalErrorHandleMiddleware: ErrorRequestHandler = (
 
   // if error comes from AppError
   if (err instanceof AppError) {
-    errObj = appErrorHandler(err)
+    errObj = appErrorHandler(err);
   }
 
   // if server run in production delete stack from errObj, so stack doesn't send with response
   if (process.env.NODE_ENV === "production") {
-    delete errObj.stack
+    delete errObj.stack;
   }
 
   // send response if any error occur

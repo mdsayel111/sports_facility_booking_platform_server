@@ -10,7 +10,7 @@ const authRouter = express.Router();
 authRouter.post(
   "/signup",
   validateRequestBody(userZodSchemas.userValidationSchema),
-  authControllers.registerUser,
+  authControllers.signupUser,
 );
 
 export default authRouter;

@@ -1,5 +1,6 @@
 import express from "express";
 import authRouter from "../modules/auth/auth.router";
+import facilityRouter from "../modules/facility/facility.route";
 
 // /api router
 const router = express.Router();
@@ -9,6 +10,10 @@ const routers = [
   {
     path: "/auth",
     router: authRouter,
+  },
+  {
+    path: "/facility",
+    router: facilityRouter,
   },
 ];
 

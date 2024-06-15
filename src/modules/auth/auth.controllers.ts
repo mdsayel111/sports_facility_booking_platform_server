@@ -3,8 +3,8 @@ import catchAsync from "../../middlewares/HOF.middlewares/catch-async.middleware
 import sendResponse from "../../utils/send-response";
 import authService from "./auth.service";
 
-// wrap the middleware by catch async for error async error handle
-const registerUser: RequestHandler = catchAsync(async (req, res) => {
+// wrap the middleware by catch async for async error handleling
+const signupUser: RequestHandler = catchAsync(async (req, res) => {
   // creat user
   const result = await authService.creatUser(req.body);
 
@@ -21,7 +21,7 @@ const registerUser: RequestHandler = catchAsync(async (req, res) => {
 
 // auth controllers
 const authControllers = {
-  registerUser,
+  signupUser,
 };
 
 export default authControllers;
