@@ -1,13 +1,21 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint  no-unused-vars: "error" */
 import { ErrorRequestHandler } from "express";
+import mongoose from 'mongoose';
 import { ZodError } from "zod";
-import zodErrorHandler from "../errors/zod.error";
+import mongooseValidationErrorHandler from '../error-handler/mongoose-validation-error-handler';
+import zodErrorHandler from "../error-handler/zod.error-handler";
+import { TErrorObj } from '../interface/error';
+// import mongooseCastErrorHandler from "../error-handler/mongoose-cast-error-handler";
+import mongooseDuplicateKeyErrorHandler from "../error-handler/mongoose-duplicate-key-error-handler";
 
 // global error handle middleware
 const globalErrorHandleMiddleware: ErrorRequestHandler = (err, req, res, next) => {
     let status = 500
-    // default error message
-    let errObj = {
-        "success": false,
+
+    // default errObj
+    let errObj: TErrorObj = {
         "message": "Something went wrong !",
         "errorMessages": [
             {
@@ -19,34 +27,43 @@ const globalErrorHandleMiddleware: ErrorRequestHandler = (err, req, res, next) =
         "stack": ""
     }
 
+    let newErrorObj: null | TErrorObj = null
+
     // if error comes from zod validation
     if (err instanceof ZodError) {
         // set status
         status = 403
+
         // pass err to zodErrorHandler function
-        const newErrObj = zodErrorHandler(err)
+        newErrorObj = zodErrorHandler(err)
+    }
 
-        // get value of newErrObj by destructuring
-        const { message, errorMessages, stack } = newErrObj
+    // if error comes for mongoose validation
+    if (err instanceof mongoose.Error.ValidationError) {
+        // pass err to mongooseValidationErrorHandler
+        newErrorObj = mongooseValidationErrorHandler(err)
+    }
 
-        // set value of errObj.message if message exist
-        if (message) {
-            errObj.message = message
-        }
+    // -------> TODO : handle mongoose cast error <------
+    // if error comes from mongoose cast error
+    // if (err instanceof mongoose.Error.CastError) {
+    //     // pass err to mongooseCastErrorHandler
+    //     newErrorObj = mongooseCastErrorHandler(err)
+    // }
 
-        // set value of errObj.errorMessages if errorMessages exist
-        if (errorMessages) {
-            errObj.errorMessages = errorMessages
-        }
+    // if error comes from mongoose duplicate key error
+    if (err.code === 11000) {
+        // pass err to mongooseCastErrorHandler
+        newErrorObj = mongooseDuplicateKeyErrorHandler(err)
+    }
 
-        // set value of errObj.stack if stack exist
-        if (stack) {
-            errObj.stack = stack
-        }
+    // if newErrorObj is not null set errObj = newObj 
+    if (newErrorObj) {
+        errObj = newErrorObj
     }
 
     // send response if any error occur
-    res.status(status).send(errObj)
+    res.status(status).send({ success: false, ...errObj })
 }
 
 export default globalErrorHandleMiddleware

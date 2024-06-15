@@ -4,13 +4,8 @@ import { RequestHandler } from "express"
 const catchAsync = (fun: RequestHandler) => {
     // creat middleware for catch acync error
     const middleware: RequestHandler = async (req, res, next) => {
-        try {
-            // call the callback
-            await fun(req, res, next)
-        } catch (err) {
-            // if any error occur when run callback fun, pass the error to global error handler
-            next(err)
-        }
+        // call the callback and if any error occur when run callback fun, pass the error to global error handler
+        Promise.resolve(fun(req, res, next)).catch((err) => next(err))
     }
 
     // return the middleware

@@ -5,7 +5,9 @@ import config from "./config";
 
 const port = config.port;
 
+// server
 let server: Server;
+
 
 // handle unhandleRejection
 process.on("unhandledRejection", () => {
@@ -39,7 +41,6 @@ async function main() {
     console.log(error);
   }
 }
-var a = 10
 
 // call the main function
 main();
