@@ -1,7 +1,7 @@
 import { RequestHandler } from "express";
-import authService from "./auth.service";
-import sendResponse from "../../utils/send-response";
 import catchAsync from "../../middlewares/HOF.middlewares/catch-async.middleware";
+import sendResponse from "../../utils/send-response";
+import authService from "./auth.service";
 
 // wrap the middleware by catch async for error async error handle
 const registerUser: RequestHandler = catchAsync(async (req, res) => {

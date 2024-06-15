@@ -8,11 +8,10 @@ const port = config.port;
 // server
 let server: Server;
 
-
 // handle unhandleRejection
 process.on("unhandledRejection", () => {
   // close all connection
-  server.closeAllConnections()
+  server.closeAllConnections();
 
   // turn off the server
   server.close(() => {

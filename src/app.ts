@@ -8,7 +8,7 @@ import globalErrorHandleMiddleware from "./middlewares/global-error-handler.midd
 const app = express();
 
 // parse req.body
-app.use(express.json())
+app.use(express.json());
 
 app.use("/api", router);
 
@@ -20,6 +20,6 @@ app.get("/", (req: Request, res: Response) => {
 app.all("*", notFound);
 
 // global error handler
-app.use(globalErrorHandleMiddleware)
+app.use(globalErrorHandleMiddleware);
 
 export default app;

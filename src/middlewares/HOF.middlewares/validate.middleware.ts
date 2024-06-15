@@ -8,15 +8,17 @@ const validateRequestBody = (
   schema: AnyZodObject | ZodEffects<any, any, any>,
 ) => {
   // creat a middleware for validate function
-  const validationHandler: RequestHandler = catchAsync(async (req, res, next) => {
-    // parse data by zod schema
-    const parseData = schema.parse(req.body);
+  const validationHandler: RequestHandler = catchAsync(
+    async (req, res, next) => {
+      // parse data by zod schema
+      const parseData = schema.parse(req.body);
 
-    // set parse data to req.body
-    req.body = parseData;
+      // set parse data to req.body
+      req.body = parseData;
 
-    next();
-  });
+      next();
+    },
+  );
 
   // return validationHandler to use it as a middleware
   return validationHandler;

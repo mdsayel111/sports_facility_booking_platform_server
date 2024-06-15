@@ -16,7 +16,7 @@ const userValidationSchema = z
   .refine((data) => {
     // set role = "user" forcefully
     data.role = "user";
-    data.isDeleted = false
+    data.isDeleted = false;
     return true;
   });
 
