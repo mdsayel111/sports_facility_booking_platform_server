@@ -1,10 +1,10 @@
-// import mongoose from "mongoose";
-// import { TErrorHandler } from "../interface/error";
+import mongoose from "mongoose";
+import { TErrorHandler } from "../interface/error";
 
-// // creat mongoose cast error handler
-// const mongooseCastErrorHandler: TErrorHandler = (err: mongoose.Error.CastError) => {
-//     // duplicate feild anem
-//     const dupFeildName = Object.keys(err.keyPattern)[0]
-// }
+// creat mongoose cast error handler
+const mongooseCastErrorHandler: TErrorHandler = (err: mongoose.Error.CastError) => {
+    // return errObj
+    return { status: 400, errorMessages: [{ path: "", message: "Invalid Id" }], message: "Invalid Id", stack: err.stack }
+}
 
-// export default mongooseCastErrorHandler
+export default mongooseCastErrorHandler

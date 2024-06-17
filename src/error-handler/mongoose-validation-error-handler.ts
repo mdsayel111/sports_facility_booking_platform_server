@@ -12,7 +12,7 @@ const mongooseValidationErrorHandler: TErrorHandler = (
   err: mongoose.Error.ValidationError,
 ) => {
   // extact feild name from err.message
-  const feildName = extractFeildName(err.message);
+  const feildName = extractFeildName(err.message) || "" ;
 
   // creat an reasonable message by concate extact feildName and "is required"
   const message = feildName + " is required";
@@ -21,7 +21,7 @@ const mongooseValidationErrorHandler: TErrorHandler = (
   return {
     status: 403,
     message,
-    errorMessages: [{ path: feildName as "", message }],
+    errorMessages: [{ path: feildName , message }],
     stack: err.stack,
   };
 };

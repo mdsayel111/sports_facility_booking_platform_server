@@ -11,6 +11,7 @@ import { TErrorObj } from "../interface/error";
 import mongooseDuplicateKeyErrorHandler from "../error-handler/mongoose-duplicate-key-error-handler";
 import AppError from "../custom-error/app-error";
 import appErrorHandler from "../error-handler/app-error-handler";
+import mongooseCastErrorHandler from "../error-handler/mongoose-cast-error-handler";
 
 // global error handle middleware
 const globalErrorHandleMiddleware: ErrorRequestHandler = (
@@ -46,17 +47,21 @@ const globalErrorHandleMiddleware: ErrorRequestHandler = (
     newErrorObj = mongooseValidationErrorHandler(err);
   }
 
-  // -------> TODO : handle mongoose cast error <------
   // if error comes from mongoose cast error
-  // if (err instanceof mongoose.Error.CastError) {
-  //     // pass err to mongooseCastErrorHandler
-  //     newErrorObj = mongooseCastErrorHandler(err)
-  // }
+  if (err instanceof mongoose.Error.CastError) {
+    console.log(err instanceof mongoose.Error.CastError)
+      // pass err to mongooseCastErrorHandler
+      newErrorObj = mongooseCastErrorHandler(err)
+  }
 
   // if error comes from mongoose duplicate key error
   if (err.code === 11000) {
     // pass err to mongooseCastErrorHandler
     newErrorObj = mongooseDuplicateKeyErrorHandler(err);
+  }
+  // if error comes from AppError
+  if (err instanceof AppError) {
+    errObj = appErrorHandler(err);
   }
 
   // if newErrorObj is not null set errObj = newObj
@@ -64,15 +69,12 @@ const globalErrorHandleMiddleware: ErrorRequestHandler = (
     errObj = newErrorObj;
   }
 
-  // if error comes from AppError
-  if (err instanceof AppError) {
-    errObj = appErrorHandler(err);
-  }
 
   // if server run in production delete stack from errObj, so stack doesn't send with response
   if (process.env.NODE_ENV === "production") {
     delete errObj.stack;
   }
+  // console.log(err)
 
   // send response if any error occur
   res.status(errObj.status).send({ success: false, ...errObj });
