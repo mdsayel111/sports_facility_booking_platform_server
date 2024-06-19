@@ -1,8 +1,7 @@
-import { Request, Response } from "express";
-import express from "express";
-import router from "./router";
-import notFound from "./middlewares/not-found.middleware";
-import globalErrorHandleMiddleware from "./middlewares/global-error-handler.middleware";
+import express, { Request, Response } from "express";
+import globalErrorHandleMiddleware from "./app/middlewares/global-error-handler.middleware";
+import notFound from "./app/middlewares/not-found.middleware";
+import router from "./app/router";
 
 // creat app
 const app = express();
