@@ -20,8 +20,8 @@ const validateRequestBody = (
     },
   );
 
-  // return validationHandler to use it as a middleware
-  return validationHandler;
+  // return validationHandler to use it as a middleware, and wrap it to catchAsync for catch async error
+  return catchAsync(validationHandler);
 };
 
 export default validateRequestBody;

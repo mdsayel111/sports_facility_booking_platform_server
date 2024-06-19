@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /* eslint-disable no-unused-vars */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint  no-unused-vars: "error" */
@@ -72,6 +73,8 @@ const globalErrorHandleMiddleware: ErrorRequestHandler = (
   if (process.env.NODE_ENV === "production") {
     delete errObj.stack;
   }
+
+  console.log(err)
 
   // send response if any error occur
   res.status(errObj.status).send({ success: false, ...errObj });

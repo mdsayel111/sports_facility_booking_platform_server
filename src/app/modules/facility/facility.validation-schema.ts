@@ -1,6 +1,6 @@
 import z from "zod";
 
-// facility validation schema
+// facility creat validation schema
 const facilityValidationSchema = z
   .object({
     name: z.string({ required_error: "Name is requiered !" }),
@@ -9,16 +9,20 @@ const facilityValidationSchema = z
       required_error: "Price per hour number is required !",
     }),
     location: z.string({ required_error: "location is required !" }),
-    isDeleted: z.boolean().default(false),
   })
-  .refine((data) => {
-    // set isDeleted = false forcefully
-    data.isDeleted = false;
-    return true;
-  });
+
+// facility update validation schema
+const facilityUpdateValidationSchema = z
+  .object({
+    name: z.string().optional(),
+    description: z.string().optional(),
+    pricePerHour: z.number().optional(),
+    location: z.string().optional(),
+  })
 
 const facilityZodSchemas = {
   facilityValidationSchema,
+  facilityUpdateValidationSchema
 };
 
 export default facilityZodSchemas;

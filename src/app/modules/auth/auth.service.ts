@@ -12,13 +12,13 @@ const creatUser = async (payload: TUser) => {
 
   // if user is null
   if (!user) {
-    throw new AppError(400, "Failed to creat user !")
+    throw new AppError(400, "Failed to creat user !");
   }
 
   /* eslint-disable @typescript-eslint/no-unused-vars */
   /* eslint-disable no-unused-vars */
   // delete isDeleted property by destucturing
-  const { isDeleted, password, ...userInfo } = user.toObject()
+  const { isDeleted, password, ...userInfo } = user.toObject();
 
   return userInfo;
 };
@@ -26,31 +26,33 @@ const creatUser = async (payload: TUser) => {
 // creat login srvice
 const login = async (payload: Pick<TUser, "email" | "password">) => {
   // check if user exist or not
-  const user = await User.findOne({ email: payload.email }).select("+password +isDeleted")
+  const user = await User.findOne({ email: payload.email }).select(
+    "+password +isDeleted",
+  );
 
   // if user doesn't exist
   if (!user || user.isDeleted) {
-    throw new AppError(403, "Email or password incorrect !")
+    throw new AppError(403, "Email or password incorrect !");
   }
 
   // check if password match or not
-  const isPassMatch = isPasswordMatch(payload.password, user.password)
+  const isPassMatch = isPasswordMatch(payload.password, user.password);
 
   // if password doesn't match
   if (!isPassMatch) {
-    throw new AppError(403, "Email or password incorrect !")
+    throw new AppError(403, "Email or password incorrect !");
   }
 
   // delete password from response
-  const { password, isDeleted, ...userInfo } = user.toObject()
+  const { password, isDeleted, ...userInfo } = user.toObject();
 
-  return userInfo
-}
+  return userInfo;
+};
 
 // auth services
 const authService = {
   creatUser,
-  login
+  login,
 };
 
 export default authService;

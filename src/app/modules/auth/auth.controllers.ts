@@ -10,14 +10,12 @@ const signupUser: RequestHandler = catchAsync(async (req, res) => {
   // creat user
   const userInfo = await authService.creatUser(req.body);
 
-
   // send response
   sendResponse(res, {
     success: true,
     message: "User registered successfully",
     data: userInfo,
   });
-
 });
 
 // login moddleware
@@ -27,10 +25,10 @@ const login: RequestHandler = catchAsync(async (req, res) => {
   const userInfo = await authService.login(req.body);
 
   // creat jwtPayload for creat token
-  const jwtPayload = { email: userInfo.email, role: userInfo.role }
+  const jwtPayload = { email: userInfo.email, role: userInfo.role };
 
   // creat jwt token
-  const token = creatToken(jwtPayload)
+  const token = creatToken(jwtPayload);
 
   // send response
   sendResponse(res, {
@@ -39,13 +37,12 @@ const login: RequestHandler = catchAsync(async (req, res) => {
     token: token,
     data: userInfo,
   });
-
 });
 
 // auth controllers
 const authControllers = {
   signupUser,
-  login
+  login,
 };
 
 export default authControllers;

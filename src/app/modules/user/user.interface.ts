@@ -1,4 +1,4 @@
-import {  Types } from "mongoose";
+import { Types } from "mongoose";
 
 // creat role type
 export type TRole = "user" | "admin";
