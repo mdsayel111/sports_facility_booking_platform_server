@@ -8,11 +8,7 @@ import authorize from "../../middlewares/HOF.middlewares/authorization.middlewar
 const bookingRouter = express.Router();
 
 // get all booking route
-bookingRouter.get(
-  "/",
-  authorize("admin"),
-  bookingControllers.getAllBookings,
-);
+bookingRouter.get("/", authorize("admin"), bookingControllers.getAllBookings);
 
 // get all booking of user route
 bookingRouter.get(

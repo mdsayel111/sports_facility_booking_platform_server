@@ -6,7 +6,6 @@ import bookingService from "./booking.service";
 // getAllBookings middleware
 // wrap the middleware by catchAsync for async error handleling
 const getAllBookings: RequestHandler = catchAsync(async (req, res) => {
-
   // get all bookings
   const result = await bookingService.getAllBookings();
 
@@ -21,9 +20,10 @@ const getAllBookings: RequestHandler = catchAsync(async (req, res) => {
 // getAllBookingsOfUser middleware
 // wrap the middleware by catchAsync for async error handleling
 const getAllBookingsOfUser: RequestHandler = catchAsync(async (req, res) => {
-
   // get all bookings
-  const result = await bookingService.getAllBookingsOfUser(req.user?.email as string);
+  const result = await bookingService.getAllBookingsOfUser(
+    req.user?.email as string,
+  );
 
   // send response
   sendResponse(res, {
@@ -37,7 +37,7 @@ const getAllBookingsOfUser: RequestHandler = catchAsync(async (req, res) => {
 // wrap the middleware by catchAsync for async error handleling
 const creatBooking: RequestHandler = catchAsync(async (req, res) => {
   // user email
-  const email = req.user?.email as string
+  const email = req.user?.email as string;
 
   // creat booking
   const result = await bookingService.creatBooking(email, req.body);
@@ -54,7 +54,7 @@ const creatBooking: RequestHandler = catchAsync(async (req, res) => {
 // wrap the middleware by catchAsync for async error handleling
 const deleteBooking: RequestHandler = catchAsync(async (req, res) => {
   // user email
-  const { _id } = req.params
+  const { _id } = req.params;
 
   // creat booking
   const result = await bookingService.deleteBooking(_id);
@@ -72,7 +72,7 @@ const bookingControllers = {
   getAllBookings,
   getAllBookingsOfUser,
   creatBooking,
-  deleteBooking
+  deleteBooking,
 };
 
 export default bookingControllers;

@@ -25,7 +25,7 @@ const authorize = (...role: TRole[]) => {
       }
 
       // put the decoded data to req.user
-      req.user = decoded
+      req.user = decoded;
 
       // if user is authorize
       next();

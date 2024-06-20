@@ -2,6 +2,7 @@ import express from "express";
 import authRouter from "../modules/auth/auth.router";
 import facilityRouter from "../modules/facility/facility.router";
 import bookingRouter from "../modules/booking/booking.router";
+import checkAbilityRouter from "../modules/check-ability/check-ability.route";
 
 // /api router
 const router = express.Router();
@@ -19,6 +20,10 @@ const routers = [
   {
     path: "/bookings",
     router: bookingRouter,
+  },
+  {
+    path: "/check-availability",
+    router: checkAbilityRouter,
   },
 ];
 

@@ -15,7 +15,7 @@ const bookingSchema = new Schema<TBooking>({
     default: "confirmed",
   },
   // user will be _id of User collection
-  user: { type: mongoose.Schema.ObjectId, ref: "User" }
+  user: { type: mongoose.Schema.ObjectId, ref: "User" },
 });
 
 // creat model
