@@ -9,7 +9,7 @@ const authorize = (...role: TRole[]) => {
   // creat authorize middleware
   const authorizeMiddleware: RequestHandler = async (req, res, next) => {
     try {
-      const { Authorization: tokenFromHeader } = req.headers;
+      const { authorization: tokenFromHeader } = req.headers;
 
       // if token didn't send in req headers
       if (!tokenFromHeader) {
