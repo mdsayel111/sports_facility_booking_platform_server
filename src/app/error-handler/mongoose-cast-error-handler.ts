@@ -7,7 +7,6 @@ const mongooseCastErrorHandler: TErrorHandler = (
 ) => {
   // return errObj
   return {
-    status: 400,
     errorMessages: [{ path: "", message: "Invalid Id" }],
     message: "Invalid Id",
     stack: err.stack,

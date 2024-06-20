@@ -8,7 +8,7 @@ import authorize from "../../middlewares/HOF.middlewares/authorization.middlewar
 const facilityRouter = express.Router();
 
 // get all facility route
-facilityRouter.get("/", authorize("admin"), facilityControllers.getAllFacility);
+facilityRouter.get("/", facilityControllers.getAllFacility);
 
 // creat facility route
 facilityRouter.post(

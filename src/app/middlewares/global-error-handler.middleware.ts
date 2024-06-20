@@ -21,9 +21,11 @@ const globalErrorHandleMiddleware: ErrorRequestHandler = (
   res,
   next,
 ) => {
+  // status 
+  let status = 500
+
   // default errObj
   let errObj: TErrorObj = {
-    status: 500,
     message: "Something went wrong !",
     errorMessages: [
       {
@@ -38,30 +40,41 @@ const globalErrorHandleMiddleware: ErrorRequestHandler = (
 
   // if error comes from zod validation
   if (err instanceof ZodError) {
+    status = 400
+
     // pass err to zodErrorHandler function
     newErrorObj = zodErrorHandler(err);
   }
 
   // if error comes for mongoose validation
   if (err instanceof mongoose.Error.ValidationError) {
+    status = 400
+
     // pass err to mongooseValidationErrorHandler
     newErrorObj = mongooseValidationErrorHandler(err);
   }
 
   // if error comes from mongoose cast error
   if (err instanceof mongoose.Error.CastError) {
+    status = 400
+
     // pass err to mongooseCastErrorHandler
     newErrorObj = mongooseCastErrorHandler(err);
   }
 
   // if error comes from mongoose duplicate key error
   if (err.code === 11000) {
+    status = 400
+
     // pass err to mongooseCastErrorHandler
     newErrorObj = mongooseDuplicateKeyErrorHandler(err);
   }
   // if error comes from AppError
   if (err instanceof AppError) {
-    errObj = appErrorHandler(err);
+    status = err.statusValue
+
+    // pass err to appErrorHandler
+    newErrorObj = appErrorHandler(err);
   }
 
   // if newErrorObj is not null set errObj = newObj
@@ -70,14 +83,17 @@ const globalErrorHandleMiddleware: ErrorRequestHandler = (
   }
 
   // if server run in production delete stack from errObj, so stack doesn't send with response
-  if (process.env.NODE_ENV === "production") {
-    delete errObj.stack;
+  // if (process.env.NODE_ENV === "production") {
+  //   delete errObj.stack;
+  // }
+
+  // if status comes for authentication, then set statusCode to errObj
+  if (status === 401) {
+    errObj.statusCode = 401
   }
 
-  console.log(err);
-
   // send response if any error occur
-  res.status(errObj.status).send({ success: false, ...errObj });
+  res.status(status).send({ success: false, ...errObj });
 };
 
 export default globalErrorHandleMiddleware;

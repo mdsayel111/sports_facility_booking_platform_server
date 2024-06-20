@@ -7,9 +7,9 @@ const checkAbilityRouter = express.Router();
 
 // check-ability route
 checkAbilityRouter.get(
-    "/",
-    authorize("user"),
-    checkAbilityControllers.checkAbility,
+  "/",
+  authorize("user", "admin"),
+  checkAbilityControllers.checkAbility,
 );
 
 export default checkAbilityRouter;

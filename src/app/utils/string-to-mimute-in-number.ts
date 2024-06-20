@@ -10,4 +10,4 @@ const stringToMuniteInNumber = (time: string) => {
   return totalMinutes;
 };
 
-export default stringToMuniteInNumber
+export default stringToMuniteInNumber;

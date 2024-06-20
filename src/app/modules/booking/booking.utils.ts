@@ -2,8 +2,6 @@ import checkConflictTime from "../../utils/check-coflict-time";
 import stringToMuniteInNumber from "../../utils/string-to-mimute-in-number";
 import { TBooking } from "./booking.interface";
 
-
-
 // creat calculatePayableAmount function
 export function calculatePayableAmount(
   startTime: string,
@@ -33,11 +31,16 @@ export const isTimeConflict = (
     // each booking
     const eachBooking = bookingsFromDB[i];
 
-    const isConflict = checkConflictTime(bookingFromCLient.startTime, bookingFromCLient.endTime, eachBooking.startTime, eachBooking.endTime)
+    const isConflict = checkConflictTime(
+      bookingFromCLient.startTime,
+      bookingFromCLient.endTime,
+      eachBooking.startTime,
+      eachBooking.endTime,
+    );
 
     if (isConflict) {
-      return true
+      return true;
     }
   }
-  return false
+  return false;
 };

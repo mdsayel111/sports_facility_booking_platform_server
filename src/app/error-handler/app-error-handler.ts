@@ -5,7 +5,6 @@ import { TErrorHandler } from "../interface/error";
 const appErrorHandler: TErrorHandler = (err: AppError) => {
   // return errObj
   return {
-    status: err.statusValue,
     errorMessages: [{ path: "", message: err.message }],
     message: err.message,
     stack: err.stack || "",

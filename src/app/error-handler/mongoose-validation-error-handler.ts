@@ -19,7 +19,6 @@ const mongooseValidationErrorHandler: TErrorHandler = (
 
   // return the err obj
   return {
-    status: 403,
     message,
     errorMessages: [{ path: feildName, message }],
     stack: err.stack,

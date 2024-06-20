@@ -10,7 +10,6 @@ const mongooseDuplicateKeyErrorHandler: TErrorHandler = (err) => {
 
   // return errObj
   return {
-    status: 409,
     message,
     errorMessages: [{ path: `${dupFeildName}`, message }],
     stack: err.stack,

@@ -33,7 +33,7 @@ const login: RequestHandler = catchAsync(async (req, res) => {
   // send response
   sendResponse(res, {
     success: true,
-    message: "User registered successfully",
+    message: "User logged in successfully",
     token: token,
     data: userInfo,
   });

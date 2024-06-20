@@ -2,7 +2,7 @@
 /* eslint-disable no-unused-vars */
 /* eslint @typescript-eslint/no-explicit-any: "error" */
 export type TErrorObj = {
-  status: number;
+  statusCode?: number;
   message: string;
   errorMessages: { path: string; message: string }[];
   stack: string | undefined;

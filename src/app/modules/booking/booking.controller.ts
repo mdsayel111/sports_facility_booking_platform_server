@@ -8,6 +8,17 @@ import bookingService from "./booking.service";
 const getAllBookings: RequestHandler = catchAsync(async (req, res) => {
   // get all bookings
   const result = await bookingService.getAllBookings();
+  
+  // if data not found
+  if(result.length === 0){
+    // send no found data response
+    sendResponse(res, {
+      success: false,
+      status: 404,
+      message: "No Data Found",
+      data: result,
+    });
+  }
 
   // send response
   sendResponse(res, {
@@ -24,6 +35,17 @@ const getAllBookingsOfUser: RequestHandler = catchAsync(async (req, res) => {
   const result = await bookingService.getAllBookingsOfUser(
     req.user?.email as string,
   );
+
+  // if data not found
+  if(result.length === 0){
+    // send no found data response
+    sendResponse(res, {
+      success: false,
+      status: 404,
+      message: "No Data Found",
+      data: result,
+    });
+  }
 
   // send response
   sendResponse(res, {

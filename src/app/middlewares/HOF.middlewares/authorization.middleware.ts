@@ -13,7 +13,7 @@ const authorize = (...role: TRole[]) => {
 
       // if token didn't send in req headers
       if (!tokenFromHeader) {
-        throw new AppError(403, "Unathorize");
+        throw new AppError(401, "You have no access to this route");
       }
 
       // get decoded data
@@ -21,7 +21,7 @@ const authorize = (...role: TRole[]) => {
 
       // if decoded is null or decoded.role not include in the role param array throw error
       if (!decoded || !role.includes((decoded as JwtPayload).role)) {
-        throw new AppError(403, "Unathorize");
+        throw new AppError(401, "You have no access to this route");
       }
 
       // put the decoded data to req.user

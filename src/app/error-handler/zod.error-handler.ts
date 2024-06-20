@@ -8,7 +8,6 @@ const zodErrorHandler: TErrorHandler = (err: ZodError) => {
 
   // return errObj
   return {
-    status: 403,
     message: err.errors[0].message,
     errorMessages: [
       {

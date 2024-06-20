@@ -5,7 +5,7 @@ import { Facility } from "./facility.model";
 // getAll facility service
 const getAllFacility = async () => {
   // get all facility
-  const facility = await Facility.find();
+  const facility = await Facility.find({isDeleted: false});
 
   // if facility is null throw error
   if (!facility) {

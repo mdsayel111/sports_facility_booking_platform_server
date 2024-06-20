@@ -8,6 +8,17 @@ const getAllFacility: RequestHandler = catchAsync(async (req, res) => {
   // get all facility
   const result = await facilityService.getAllFacility();
 
+  // if data not found
+  if (result.length === 0) {
+    // send no found data response
+    sendResponse(res, {
+      success: false,
+      status: 404,
+      message: "No Data Found",
+      data: result,
+    });
+  }
+
   // send response
   sendResponse(res, {
     success: true,
@@ -25,7 +36,7 @@ const creatFacility: RequestHandler = catchAsync(async (req, res) => {
   // send response
   sendResponse(res, {
     success: true,
-    message: "Facility creat successfully",
+    message: "Facility added successfully",
     data: result,
   });
 });
