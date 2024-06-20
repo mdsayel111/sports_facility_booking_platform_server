@@ -11,7 +11,11 @@ const checkAbility = async (email: string, date?: string) => {
 
   // creat find obj
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const findObj: Record<string, any> = { user: user?._id, date: new Date(), isBooked: "confirmed" };
+  const findObj: Record<string, any> = {
+    user: user?._id,
+    date: new Date(),
+    isBooked: "confirmed",
+  };
 
   if (date) {
     findObj.date = new Date(date);

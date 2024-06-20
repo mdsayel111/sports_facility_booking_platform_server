@@ -8,9 +8,9 @@ import bookingService from "./booking.service";
 const getAllBookings: RequestHandler = catchAsync(async (req, res) => {
   // get all bookings
   const result = await bookingService.getAllBookings();
-  
+
   // if data not found
-  if(result.length === 0){
+  if (result.length === 0) {
     // send no found data response
     sendResponse(res, {
       success: false,
@@ -37,7 +37,7 @@ const getAllBookingsOfUser: RequestHandler = catchAsync(async (req, res) => {
   );
 
   // if data not found
-  if(result.length === 0){
+  if (result.length === 0) {
     // send no found data response
     sendResponse(res, {
       success: false,

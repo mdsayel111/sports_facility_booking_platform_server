@@ -8,7 +8,10 @@ import { calculatePayableAmount, isTimeConflict } from "./booking.utils";
 // get all bookings
 const getAllBookings = async () => {
   // get all bookings from DB
-  const bookings = (await Booking.find({ isBooked: "confirmed" }).populate(["facility", "user"]));
+  const bookings = await Booking.find({ isBooked: "confirmed" }).populate([
+    "facility",
+    "user",
+  ]);
 
   return bookings;
 };
@@ -37,7 +40,7 @@ const creatBooking = async (userEmail: string, payload: TBooking) => {
   }
 
   if (facility?.isDeleted) {
-    throw new AppError(400, "Facility has been deleted !")
+    throw new AppError(400, "Facility has been deleted !");
   }
 
   // get bookings which can confict with current booking time
