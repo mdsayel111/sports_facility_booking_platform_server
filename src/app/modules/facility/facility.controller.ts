@@ -5,7 +5,6 @@ import facilityService from "./facility.service";
 
 // wrap the middleware by catchAsync for async error handleling
 const getAllFacility: RequestHandler = catchAsync(async (req, res) => {
-
   // get all facility
   const result = await facilityService.getAllFacility();
 
@@ -31,10 +30,9 @@ const creatFacility: RequestHandler = catchAsync(async (req, res) => {
   });
 });
 
-
 // wrap the middleware by catchAsync for async error handleling
 const updateFacility: RequestHandler = catchAsync(async (req, res) => {
-  const { _id } = req.params
+  const { _id } = req.params;
 
   // update facility
   const result = await facilityService.updateFacility(_id, req.body);
@@ -49,7 +47,7 @@ const updateFacility: RequestHandler = catchAsync(async (req, res) => {
 
 // wrap the middleware by catchAsync for async error handleling
 const deleteFacility: RequestHandler = catchAsync(async (req, res) => {
-  const { _id } = req.params
+  const { _id } = req.params;
 
   // delete facility
   const result = await facilityService.deleteFacility(_id);
@@ -67,7 +65,7 @@ const facilityControllers = {
   getAllFacility,
   creatFacility,
   updateFacility,
-  deleteFacility
+  deleteFacility,
 };
 
 export default facilityControllers;

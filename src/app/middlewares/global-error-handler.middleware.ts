@@ -74,7 +74,7 @@ const globalErrorHandleMiddleware: ErrorRequestHandler = (
     delete errObj.stack;
   }
 
-  console.log(err)
+  console.log(err);
 
   // send response if any error occur
   res.status(errObj.status).send({ success: false, ...errObj });

@@ -6,7 +6,7 @@ type isBooked = "confirmed" | "unconfirmed" | "canceled";
 // creat booking type
 export type TBooking = {
   _id: Types.ObjectId;
-  date: string;
+  date: Date;
   startTime: string;
   endTime: string;
   user: mongoose.Types.ObjectId;

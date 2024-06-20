@@ -9,7 +9,7 @@ const getAllFacility = async () => {
 
   // if facility is null throw error
   if (!facility) {
-    throw new AppError(400, "Failed to get all facility")
+    throw new AppError(400, "Failed to get all facility");
   }
 
   return facility;
@@ -22,7 +22,7 @@ const creatFacility = async (payload: TFacility) => {
 
   // if facility is null throw error
   if (!facility) {
-    throw new AppError(400, "Failed to creat facility")
+    throw new AppError(400, "Failed to creat facility");
   }
 
   return facility;
@@ -31,11 +31,13 @@ const creatFacility = async (payload: TFacility) => {
 // update facility service
 const updateFacility = async (_id: string, payload: Partial<TFacility>) => {
   // update facility
-  const facility = await Facility.findByIdAndUpdate(_id, payload, { new: true });
+  const facility = await Facility.findByIdAndUpdate(_id, payload, {
+    new: true,
+  });
 
   // if facility is null throw error
   if (!facility) {
-    throw new AppError(400, "Failed to update facility")
+    throw new AppError(400, "Failed to update facility");
   }
 
   return facility;
@@ -44,11 +46,15 @@ const updateFacility = async (_id: string, payload: Partial<TFacility>) => {
 // delete facility service
 const deleteFacility = async (_id: string) => {
   // delete facility
-  const facility = await Facility.findByIdAndUpdate(_id, { isDeleted: true }, { new: true });
+  const facility = await Facility.findByIdAndUpdate(
+    _id,
+    { isDeleted: true },
+    { new: true },
+  );
 
   // if facility is null throw error
   if (!facility) {
-    throw new AppError(400, "Failed to delete facility")
+    throw new AppError(400, "Failed to delete facility");
   }
 
   return facility;
@@ -59,7 +65,7 @@ const facilityService = {
   getAllFacility,
   creatFacility,
   updateFacility,
-  deleteFacility
+  deleteFacility,
 };
 
 export default facilityService;
