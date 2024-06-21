@@ -44,7 +44,10 @@ const creatBooking = async (userEmail: string, payload: TBooking) => {
   }
 
   // get bookings which can confict with current booking time
-  const userBookingsFromDB = await Booking.find({ date: payload.date, isBooked: "confirmed" });
+  const userBookingsFromDB = await Booking.find({
+    date: payload.date,
+    isBooked: "confirmed",
+  });
 
   // check time conflict or not
   const timeWillConflict = isTimeConflict(userBookingsFromDB, payload);

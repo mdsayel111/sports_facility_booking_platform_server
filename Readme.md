@@ -1,4 +1,4 @@
-# PH-Assighment-2
+# Sports Facility Booking Platform
 This is a basic ecommerce website backend project created with Node.js, Express.js, MongoDB, and Mongoose.
 
 
