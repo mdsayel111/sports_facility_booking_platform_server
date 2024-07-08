@@ -23,7 +23,6 @@ const authorize = (...role: TRole[]) => {
       if (!decoded || !role.includes((decoded as JwtPayload).role)) {
         throw new AppError(401, "You have no access to this route");
       }
-
       // put the decoded data to req.user
       req.user = decoded;
 
