@@ -18,7 +18,7 @@ declare module "express-serve-static-core" {
 }
 
 declare module "../app/interface/test.interface.ts" {
-  interface MyModule{
-    email: string
+  interface MyModule {
+    email: string;
   }
 }
