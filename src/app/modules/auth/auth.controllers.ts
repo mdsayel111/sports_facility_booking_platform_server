@@ -39,10 +39,25 @@ const login: RequestHandler = catchAsync(async (req, res) => {
   });
 });
 
+// create admin middleware
+// wrap the middleware by catch async for async error handleling
+const createAdmin: RequestHandler = catchAsync(async (req, res) => {
+  // creat user
+  const adminInfo = await authService.createAdmin(req.body);
+
+  // send response
+  sendResponse(res, {
+    success: true,
+    message: "Admin registered successfully",
+    data: adminInfo,
+  });
+});
+
 // auth controllers
 const authControllers = {
   signupUser,
   login,
+  createAdmin
 };
 
 export default authControllers;

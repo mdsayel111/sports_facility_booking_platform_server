@@ -7,6 +7,9 @@ import { User } from "../user/user.model";
 
 // creat user service
 const creatUser = async (payload: TUser) => {
+  // do role = "user" forcefully, because user can't create admin account
+  payload.role = "user"
+
   // creat user
   const user = await User.create(payload);
 
@@ -49,10 +52,32 @@ const login = async (payload: Pick<TUser, "email" | "password">) => {
   return userInfo;
 };
 
+// creat admin service
+const createAdmin = async (payload: TUser) => {
+  // do role = "admin" forcefully, because admin can create only admin account
+  payload.role = "admin"
+
+  // creat user
+  const adminInfo = await User.create(payload);
+
+  // if user is null
+  if (!adminInfo) {
+    throw new AppError(400, "Failed to creat user !");
+  }
+
+  /* eslint-disable @typescript-eslint/no-unused-vars */
+  /* eslint-disable no-unused-vars */
+  // delete isDeleted property by destucturing
+  const { isDeleted, password, ...userInfo } = adminInfo.toObject();
+
+  return userInfo;
+};
+
 // auth services
 const authService = {
   creatUser,
   login,
+  createAdmin
 };
 
 export default authService;

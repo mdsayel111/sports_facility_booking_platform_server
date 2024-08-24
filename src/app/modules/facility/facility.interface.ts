@@ -4,6 +4,7 @@ import { Types } from "mongoose";
 export type TFacility = {
   _id: Types.ObjectId;
   name: string;
+  img: string;
   description: string;
   pricePerHour: number;
   location: string;
