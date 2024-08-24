@@ -57,7 +57,7 @@ const createAdmin: RequestHandler = catchAsync(async (req, res) => {
 const authControllers = {
   signupUser,
   login,
-  createAdmin
+  createAdmin,
 };
 
 export default authControllers;

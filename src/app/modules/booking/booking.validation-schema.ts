@@ -14,8 +14,14 @@ const bookingValidationSchema = z.object({
   facility: z.string({ required_error: "Facility is required !" }),
 });
 
+// booking update validation schema
+const bookingUpdateValidationSchema = z.object({
+  isBooked: z.enum(["confirm", "cancel"], { required_error: "Status is required!" })
+});
+
 const bookingZodSchemas = {
   bookingValidationSchema,
+  bookingUpdateValidationSchema
 };
 
 export default bookingZodSchemas;

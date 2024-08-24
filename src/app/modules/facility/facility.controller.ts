@@ -27,6 +27,33 @@ const getAllFacility: RequestHandler = catchAsync(async (req, res) => {
   });
 });
 
+// wrap the middleware by catchAsync for async error handleling
+const getSingleFacility: RequestHandler = catchAsync(async (req, res) => {
+  // get id from req.params
+  const { id } = req.params
+
+  // get all facility
+  const result = await facilityService.getSingleFacility(id);
+
+  // if data not found
+  if (!result) {
+    // send no found data response
+    sendResponse(res, {
+      success: false,
+      status: 404,
+      message: "No Data Found",
+      data: result,
+    });
+  }
+
+  // send response
+  sendResponse(res, {
+    success: true,
+    message: "Facilities retrieved successfully",
+    data: result,
+  });
+});
+
 // creatFacility middleware
 // wrap the middleware by catchAsync for async error handleling
 const creatFacility: RequestHandler = catchAsync(async (req, res) => {
@@ -74,6 +101,7 @@ const deleteFacility: RequestHandler = catchAsync(async (req, res) => {
 // facility controllers
 const facilityControllers = {
   getAllFacility,
+  getSingleFacility,
   creatFacility,
   updateFacility,
   deleteFacility,

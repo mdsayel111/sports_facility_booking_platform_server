@@ -10,6 +10,9 @@ const facilityRouter = express.Router();
 // get all facility route
 facilityRouter.get("/", facilityControllers.getAllFacility);
 
+// get single facility route
+facilityRouter.get("/:id", facilityControllers.getSingleFacility);
+
 // creat facility route
 facilityRouter.post(
   "/",

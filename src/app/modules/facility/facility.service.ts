@@ -2,7 +2,7 @@ import AppError from "../../custom-error/app-error";
 import { TFacility } from "./facility.interface";
 import { Facility } from "./facility.model";
 
-// getAll facility service
+// get all facility service
 const getAllFacility = async () => {
   // get all facility
   const facility = await Facility.find({ isDeleted: false });
@@ -10,6 +10,19 @@ const getAllFacility = async () => {
   // if facility is null throw error
   if (!facility) {
     throw new AppError(400, "Failed to get all facility");
+  }
+
+  return facility;
+};
+
+// get sinle facility service
+const getSingleFacility = async (id: string) => {
+  // get all facility
+  const facility = await Facility.findOne({ _id: id, isDeleted: false });
+
+  // if facility is null throw error
+  if (!facility) {
+    throw new AppError(400, "Failed to get facility");
   }
 
   return facility;
@@ -63,6 +76,7 @@ const deleteFacility = async (_id: string) => {
 // facility services
 const facilityService = {
   getAllFacility,
+  getSingleFacility,
   creatFacility,
   updateFacility,
   deleteFacility,

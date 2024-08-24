@@ -17,12 +17,27 @@ bookingRouter.get(
   bookingControllers.getAllBookingsOfUser,
 );
 
+// get single booking of user route
+bookingRouter.get(
+  "/user/:id",
+  authorize("user"),
+  bookingControllers.getSingleBookingsOfUser,
+);
+
 // creat booking route
 bookingRouter.post(
   "/",
   authorize("user"),
   validateRequestBody(bookingZodSchemas.bookingValidationSchema),
   bookingControllers.creatBooking,
+);
+
+// creat booking route
+bookingRouter.patch(
+  "/:id",
+  authorize("user"),
+  validateRequestBody(bookingZodSchemas.bookingUpdateValidationSchema),
+  bookingControllers.updateBooking,
 );
 
 // delete booking route

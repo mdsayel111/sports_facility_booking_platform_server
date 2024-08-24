@@ -55,6 +55,36 @@ const getAllBookingsOfUser: RequestHandler = catchAsync(async (req, res) => {
   });
 });
 
+// getAllBookingsOfUser middleware
+// wrap the middleware by catchAsync for async error handleling
+const getSingleBookingsOfUser: RequestHandler = catchAsync(async (req, res) => {
+  // get id from req.params
+  const { id } = req.params
+  // get all bookings
+  const result = await bookingService.getSingleBookingsOfUser(
+    req.user?.email as string,
+    id
+  );
+
+  // if data not found
+  if (!result) {
+    // send no found data response
+    sendResponse(res, {
+      success: false,
+      status: 404,
+      message: "No Data Found",
+      data: result,
+    });
+  }
+
+  // send response
+  sendResponse(res, {
+    success: true,
+    message: "Bookings retrieved successfully",
+    data: result,
+  });
+});
+
 // creatBooking middleware
 // wrap the middleware by catchAsync for async error handleling
 const creatBooking: RequestHandler = catchAsync(async (req, res) => {
@@ -63,6 +93,26 @@ const creatBooking: RequestHandler = catchAsync(async (req, res) => {
 
   // creat booking
   const result = await bookingService.creatBooking(email, req.body);
+
+  // send response
+  sendResponse(res, {
+    success: true,
+    message: "Booking creat successfully",
+    data: result,
+  });
+});
+
+// update booking middleware
+// wrap the middleware by catchAsync for async error handleling
+const updateBooking: RequestHandler = catchAsync(async (req, res) => {
+  // get id from req.params
+  const { id } = req.params
+
+  // user email
+  const email = req.user?.email as string;
+
+  // creat booking
+  const result = await bookingService.updateBooking(email, id, req.body);
 
   // send response
   sendResponse(res, {
@@ -93,7 +143,9 @@ const deleteBooking: RequestHandler = catchAsync(async (req, res) => {
 const bookingControllers = {
   getAllBookings,
   getAllBookingsOfUser,
+  getSingleBookingsOfUser,
   creatBooking,
+  updateBooking,
   deleteBooking,
 };
 

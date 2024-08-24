@@ -8,7 +8,7 @@ import { User } from "../user/user.model";
 // creat user service
 const creatUser = async (payload: TUser) => {
   // do role = "user" forcefully, because user can't create admin account
-  payload.role = "user"
+  payload.role = "user";
 
   // creat user
   const user = await User.create(payload);
@@ -55,7 +55,7 @@ const login = async (payload: Pick<TUser, "email" | "password">) => {
 // creat admin service
 const createAdmin = async (payload: TUser) => {
   // do role = "admin" forcefully, because admin can create only admin account
-  payload.role = "admin"
+  payload.role = "admin";
 
   // creat user
   const adminInfo = await User.create(payload);
@@ -77,7 +77,7 @@ const createAdmin = async (payload: TUser) => {
 const authService = {
   creatUser,
   login,
-  createAdmin
+  createAdmin,
 };
 
 export default authService;
