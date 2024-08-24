@@ -5,6 +5,7 @@ export type TErrorObj = {
   statusCode?: number;
   message: string;
   errorMessages: { path: string; message: string }[];
+  redirectPath?: string;
   stack: string | undefined;
 };
 
