@@ -6,7 +6,7 @@ import facilityService from "./facility.service";
 // wrap the middleware by catchAsync for async error handleling
 const getAllFacility: RequestHandler = catchAsync(async (req, res) => {
   // get query from req.query
-  const query = req.query
+  const query = req.query;
 
   // get all facility
   const result = await facilityService.getAllFacility(query);

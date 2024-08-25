@@ -7,9 +7,13 @@ import { Facility } from "./facility.model";
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const getAllFacility = async (query: Record<string, any>) => {
   // get all facility
-  const facilityModel = new QueryBuilder(Facility.find({ isDeleted: false }), query);
+  const facilityModel = new QueryBuilder(
+    Facility.find({ isDeleted: false }),
+    query,
+  );
 
-  const facilitys = await facilityModel.search(["name"]).sort("pricePerHour").modelQuery
+  const facilitys = await facilityModel.search(["name"]).sort("pricePerHour")
+    .modelQuery;
 
   // if facility is null throw error
   if (!facilitys) {
