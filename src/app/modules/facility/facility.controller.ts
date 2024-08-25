@@ -12,7 +12,7 @@ const getAllFacility: RequestHandler = catchAsync(async (req, res) => {
   const result = await facilityService.getAllFacility(query);
 
   // if data not found
-  if (result.length === 0) {
+  if (result.data.length === 0) {
     // send no found data response
     return sendResponse(res, {
       success: false,

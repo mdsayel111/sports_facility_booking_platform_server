@@ -7,20 +7,30 @@ import { Facility } from "./facility.model";
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const getAllFacility = async (query: Record<string, any>) => {
   // get all facility
-  const facilityModel = new QueryBuilder(
+  const facilityQueryModel = new QueryBuilder(
     Facility.find({ isDeleted: false }),
     query,
   );
 
-  const facilitys = await facilityModel.search(["name"]).sort("pricePerHour")
-    .modelQuery;
+  facilityQueryModel.search(["name"]).sort("pricePerHour");
+
+  const documentCount = await facilityQueryModel.documentCount()
+
+  const facilities = await facilityQueryModel.modelQuery
 
   // if facility is null throw error
-  if (!facilitys) {
+  if (!facilities) {
     throw new AppError(400, "Failed to get all facility");
   }
 
-  return facilitys;
+  return {
+    meta: {
+      total: documentCount,
+      page: Number(query.page),
+      pageNumber: Math.ceil(documentCount / 10)
+    },
+    data: facilities
+  };
 };
 
 // get sinle facility service
