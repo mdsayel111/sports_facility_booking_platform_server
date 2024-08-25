@@ -5,13 +5,16 @@ import facilityService from "./facility.service";
 
 // wrap the middleware by catchAsync for async error handleling
 const getAllFacility: RequestHandler = catchAsync(async (req, res) => {
+  // get query from req.query
+  const query = req.query
+
   // get all facility
-  const result = await facilityService.getAllFacility();
+  const result = await facilityService.getAllFacility(query);
 
   // if data not found
   if (result.length === 0) {
     // send no found data response
-    sendResponse(res, {
+    return sendResponse(res, {
       success: false,
       status: 404,
       message: "No Data Found",
@@ -30,7 +33,7 @@ const getAllFacility: RequestHandler = catchAsync(async (req, res) => {
 // wrap the middleware by catchAsync for async error handleling
 const getSingleFacility: RequestHandler = catchAsync(async (req, res) => {
   // get id from req.params
-  const { id } = req.params
+  const { id } = req.params;
 
   // get all facility
   const result = await facilityService.getSingleFacility(id);

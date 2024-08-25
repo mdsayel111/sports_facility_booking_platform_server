@@ -59,11 +59,11 @@ const getAllBookingsOfUser: RequestHandler = catchAsync(async (req, res) => {
 // wrap the middleware by catchAsync for async error handleling
 const getSingleBookingsOfUser: RequestHandler = catchAsync(async (req, res) => {
   // get id from req.params
-  const { id } = req.params
+  const { id } = req.params;
   // get all bookings
   const result = await bookingService.getSingleBookingsOfUser(
     req.user?.email as string,
-    id
+    id,
   );
 
   // if data not found
@@ -106,7 +106,7 @@ const creatBooking: RequestHandler = catchAsync(async (req, res) => {
 // wrap the middleware by catchAsync for async error handleling
 const updateBooking: RequestHandler = catchAsync(async (req, res) => {
   // get id from req.params
-  const { id } = req.params
+  const { id } = req.params;
 
   // user email
   const email = req.user?.email as string;

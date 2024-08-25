@@ -31,7 +31,9 @@ const getSingleBookingsOfUser = async (userEmail: string, id: string) => {
   // get all bookings from DB
   const user = await User.findOne({ email: userEmail });
 
-  const bookings = await Booking.findOne({ user: user?._id, _id: id }).populate("facility");
+  const bookings = await Booking.findOne({ user: user?._id, _id: id }).populate(
+    "facility",
+  );
 
   return bookings;
 };
@@ -89,9 +91,13 @@ const creatBooking = async (userEmail: string, payload: TBooking) => {
 };
 
 // update booking service
-const updateBooking = async (userEmail: string, id: string, payload: TBooking) => {
+const updateBooking = async (
+  userEmail: string,
+  id: string,
+  payload: TBooking,
+) => {
   // get user from DB
-  const user = await User.findOne({ email: userEmail })
+  const user = await User.findOne({ email: userEmail });
 
   // check if booking exist or not
   const isBookingexist = await Booking.findOne({ user: user?._id, _id: id });
@@ -102,7 +108,9 @@ const updateBooking = async (userEmail: string, id: string, payload: TBooking) =
   }
 
   // update booking
-  const booking = await Booking.findOneAndUpdate({ _id: id }, payload, { new: true });
+  const booking = await Booking.findOneAndUpdate({ _id: id }, payload, {
+    new: true,
+  });
 
   return booking;
 };

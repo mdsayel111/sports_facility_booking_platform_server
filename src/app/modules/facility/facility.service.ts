@@ -1,18 +1,22 @@
 import AppError from "../../custom-error/app-error";
+import QueryBuilder from "../../query-builder/query-builder";
 import { TFacility } from "./facility.interface";
 import { Facility } from "./facility.model";
 
 // get all facility service
-const getAllFacility = async () => {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const getAllFacility = async (query: Record<string, any>) => {
   // get all facility
-  const facility = await Facility.find({ isDeleted: false });
+  const facilityModel = new QueryBuilder(Facility.find({ isDeleted: false }), query);
+
+  const facilitys = await facilityModel.search(["name"]).sort("pricePerHour").modelQuery
 
   // if facility is null throw error
-  if (!facility) {
+  if (!facilitys) {
     throw new AppError(400, "Failed to get all facility");
   }
 
-  return facility;
+  return facilitys;
 };
 
 // get sinle facility service
