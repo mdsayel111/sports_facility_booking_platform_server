@@ -14,9 +14,9 @@ const getAllFacility = async (query: Record<string, any>) => {
 
   facilityQueryModel.search(["name"]).sort("pricePerHour");
 
-  const documentCount = await facilityQueryModel.documentCount()
+  const documentCount = await facilityQueryModel.documentCount();
 
-  const facilities = await facilityQueryModel.modelQuery
+  const facilities = await facilityQueryModel.modelQuery;
 
   // if facility is null throw error
   if (!facilities) {
@@ -27,9 +27,9 @@ const getAllFacility = async (query: Record<string, any>) => {
     meta: {
       total: documentCount,
       page: Number(query.page),
-      pageNumber: Math.ceil(documentCount / 10)
+      pageNumber: Math.ceil(documentCount / 10),
     },
-    data: facilities
+    data: facilities,
   };
 };
 

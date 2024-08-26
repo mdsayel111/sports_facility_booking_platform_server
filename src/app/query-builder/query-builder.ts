@@ -43,21 +43,20 @@ class QueryBuilder<T> {
   // create document count method for count document
   async documentCount() {
     // get query from modelQuery
-    const query = this.modelQuery.getQuery()
+    const query = this.modelQuery.getQuery();
 
     // get total document
-    const totalDocument = await this.modelQuery.model.countDocuments(query)
+    const totalDocument = await this.modelQuery.model.countDocuments(query);
 
-    return totalDocument
+    return totalDocument;
   }
 
   // create paginate method for pagination
   paginate() {
     // get page number from query
-    const page = Number(this.query.page)
+    const page = Number(this.query.page);
 
-    this.modelQuery.skip(10 * page).limit(10)
-
+    this.modelQuery.skip(10 * page).limit(10);
   }
 }
 
