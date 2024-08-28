@@ -10,7 +10,6 @@ const authorize = (...role: TRole[]) => {
   const authorizeMiddleware: RequestHandler = async (req, res, next) => {
     try {
       const { authorization: tokenFromHeader } = req.headers;
-
       // if token didn't send in req headers
       if (!tokenFromHeader) {
         throw new AppError(401, "You have no access to this route");

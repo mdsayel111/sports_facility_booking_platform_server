@@ -1,36 +1,49 @@
 import stringToMuniteInNumber from "./string-to-mimute-in-number";
 
 // creat checkConfictTime function
-const checkConflictTime = (
-  firstStartTime: string,
-  firstEndTime: string,
-  secondStartTime: string,
-  secondEndTime: string,
+const checkIsSlotBooked = (
+  slotStartTime: string,
+  // slotEndTime: string,
+  bookingStartTime: string,
+  // bookingEndTime: string,
 ) => {
   // start time of first booking in mumber
-  const startTimeOfFirstInNumber = stringToMuniteInNumber(firstStartTime);
+  const slotStartTimeInNumber = stringToMuniteInNumber(slotStartTime);
 
   // end time of first booking in mumber
-  const endTimeOfFirstInNumber = stringToMuniteInNumber(firstEndTime);
+  // const slotEndTimeInNumber = stringToMuniteInNumber(slotEndTime);
+
   // start time of each booking in mumber
-  const startTimeOfSecondInNumber = stringToMuniteInNumber(secondStartTime);
+  const bookingStartTimeInNumber = stringToMuniteInNumber(bookingStartTime);
 
   // end time of each booking in mumber
-  const endTimeOfSecondInNumber = stringToMuniteInNumber(secondEndTime);
+  // const bookingEndTimeInNumber = stringToMuniteInNumber(bookingEndTime);
 
-  // check if time is conflict or not
-  if (
-    (startTimeOfFirstInNumber >= startTimeOfSecondInNumber &&
-      startTimeOfFirstInNumber < endTimeOfSecondInNumber) ||
-    (endTimeOfFirstInNumber > startTimeOfSecondInNumber &&
-      endTimeOfFirstInNumber < endTimeOfSecondInNumber)
-  ) {
-    // means time will be conflict
-    return true;
+  // // check if time is conflict or not
+  // if (
+  //   (slotStartTimeInNumber > bookingStartTimeInNumber &&
+  //     slotStartTimeInNumber < bookingEndTimeInNumber) ||
+  //   (slotEndTimeInNumber > bookingStartTimeInNumber &&
+  //     slotEndTimeInNumber < bookingEndTimeInNumber)
+  // ) {
+  //   // means time will be conflict
+  //   return true;
+  // }
+
+  // console.log({
+  //   "slot start time": slotStartTime,
+  //   "booking start time": bookingStartTime,
+  //   "isBooked": slotStartTimeInNumber === bookingStartTimeInNumber
+  // })
+
+  // check if the slot already booking or not
+  if (slotStartTimeInNumber === bookingStartTimeInNumber) {
+    // means, this slot is booking
+    return true
   }
 
   // time will ne not conflict
   return false;
 };
 
-export default checkConflictTime;
+export default checkIsSlotBooked;

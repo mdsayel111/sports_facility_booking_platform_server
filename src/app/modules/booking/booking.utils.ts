@@ -1,4 +1,4 @@
-import checkConflictTime from "../../utils/check-coflict-time";
+import checkIsSlotBooked from "../../utils/check-coflict-time";
 import stringToMuniteInNumber from "../../utils/string-to-mimute-in-number";
 import { TBooking } from "./booking.interface";
 
@@ -31,7 +31,7 @@ export const isTimeConflict = (
     // each booking
     const eachBooking = bookingsFromDB[i];
 
-    const isConflict = checkConflictTime(
+    const isConflict = checkIsSlotBooked(
       bookingFromCLient.startTime,
       bookingFromCLient.endTime,
       eachBooking.startTime,
