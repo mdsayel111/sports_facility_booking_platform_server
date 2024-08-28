@@ -33,9 +33,7 @@ export const isTimeConflict = (
 
     const isConflict = checkIsSlotBooked(
       bookingFromCLient.startTime,
-      bookingFromCLient.endTime,
       eachBooking.startTime,
-      eachBooking.endTime,
     );
 
     if (isConflict) {

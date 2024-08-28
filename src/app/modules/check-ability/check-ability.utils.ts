@@ -1,4 +1,4 @@
-import checkIsSlotBooked from "../../utils/check-coflict-time";
+import isTimeConflict from "../../utils/check-coflict-time";
 import { TBooking } from "../booking/booking.interface";
 
 // creat get available slot function
@@ -34,7 +34,7 @@ export const getAvailableSlots = (bookings: TBooking[]) => {
       // );
 
       // check is slot book or not
-      const isSlotBooked = checkIsSlotBooked(
+      const isSlotBooked = isTimeConflict(
         slot.startTime,
         eachBooking.startTime,
       );
