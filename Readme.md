@@ -7,6 +7,10 @@ This is a basic ecommerce website backend project created with Node.js, Express.
 To run project locally, run the following command
 
 ```bash
+  npm install
+```
+
+```bash
   npm run dev
 ```
 

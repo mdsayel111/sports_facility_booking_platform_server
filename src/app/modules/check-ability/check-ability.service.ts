@@ -9,7 +9,7 @@ import { getAvailableSlots } from "./check-ability.utils";
 const checkAbility = async (email: string, date: string) => {
   // if date not added
   if (!date) {
-    throw new AppError(400, "Add ability date!")
+    throw new AppError(400, "Add ability date!");
   }
 
   // find user from DB
@@ -22,8 +22,6 @@ const checkAbility = async (email: string, date: string) => {
     date: new Date(date),
     isBooked: "confirmed",
   };
-
-  
 
   // get all bokkings from DB
   const bookings = await Booking.find(findObj);

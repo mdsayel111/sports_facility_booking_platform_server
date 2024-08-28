@@ -21,7 +21,6 @@ export const getAvailableSlots = (bookings: TBooking[]) => {
   // check slot's time conflict or not with bokking's time,
   // if conflict remove slots from available slots
   const availableSlots = slots.filter((slot) => {
-
     // loop in booking
     for (let i = 0; i < bookings.length; i++) {
       const eachBooking = bookings[i];

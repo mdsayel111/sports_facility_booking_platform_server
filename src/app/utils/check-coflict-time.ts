@@ -30,16 +30,10 @@ const checkIsSlotBooked = (
   //   return true;
   // }
 
-  // console.log({
-  //   "slot start time": slotStartTime,
-  //   "booking start time": bookingStartTime,
-  //   "isBooked": slotStartTimeInNumber === bookingStartTimeInNumber
-  // })
-
   // check if the slot already booking or not
   if (slotStartTimeInNumber === bookingStartTimeInNumber) {
     // means, this slot is booking
-    return true
+    return true;
   }
 
   // time will ne not conflict

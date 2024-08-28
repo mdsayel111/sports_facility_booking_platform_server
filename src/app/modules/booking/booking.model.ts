@@ -12,7 +12,7 @@ const bookingSchema = new Schema<TBooking>({
   isBooked: {
     type: String,
     enum: ["confirmed", "unconfirmed", "canceled"],
-    default: "unconfirmed",
+    default: "confirmed",
   },
   // user will be _id of User collection
   user: { type: mongoose.Schema.ObjectId, ref: "User" },
