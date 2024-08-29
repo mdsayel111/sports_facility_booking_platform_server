@@ -10,6 +10,9 @@ const facilityRouter = express.Router();
 // get all facility route
 facilityRouter.get("/", facilityControllers.getAllFacility);
 
+// get latest facility route
+facilityRouter.get("/latest-facility", facilityControllers.getLatestFacility);
+
 // get single facility route
 facilityRouter.get("/:id", facilityControllers.getSingleFacility);
 

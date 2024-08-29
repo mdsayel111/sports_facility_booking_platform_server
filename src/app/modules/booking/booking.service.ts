@@ -8,7 +8,7 @@ import { calculatePayableAmount, isTimeConflict } from "./booking.utils";
 // get all bookings
 const getAllBookings = async () => {
   // get all bookings from DB
-  const bookings = await Booking.find({ isBooked: "confirmed" }).populate([
+  const bookings = await Booking.find({ isBooked: "confirmed" }).sort({ createdAt: "desc" }).populate([
     "facility",
     "user",
   ]);
@@ -19,7 +19,7 @@ const getAllBookings = async () => {
 // get all bookings
 const getAllBookingsOfUser = async (userEmail: string) => {
   // get all bookings from DB
-  const user = await User.findOne({ email: userEmail });
+  const user = await User.findOne({ email: userEmail }).sort({ createdAt: "desc" });
 
   const bookings = await Booking.find({ user: user?._id }).populate("facility");
 

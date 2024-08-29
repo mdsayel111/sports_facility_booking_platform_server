@@ -16,7 +16,7 @@ const getAllFacility = async (query: Record<string, any>) => {
 
   const documentCount = await facilityQueryModel.documentCount();
 
-  const facilities = await facilityQueryModel.modelQuery;
+  const facilities = await facilityQueryModel.modelQuery.sort({createdAt: "desc"});
 
   // if facility is null throw error
   if (!facilities) {
@@ -29,6 +29,21 @@ const getAllFacility = async (query: Record<string, any>) => {
       page: Number(query.page),
       pageNumber: Math.ceil(documentCount / 10),
     },
+    data: facilities,
+  };
+};
+
+// get latest facility 
+const getLatestFacility = async () => {
+
+  const facilities = await Facility.find({}).sort({ createdAt: "desc" }).limit(4);
+
+  // if facility is null throw error
+  if (!facilities) {
+    throw new AppError(400, "Failed to get all facility");
+  }
+
+  return {
     data: facilities,
   };
 };
@@ -98,6 +113,7 @@ const facilityService = {
   creatFacility,
   updateFacility,
   deleteFacility,
+  getLatestFacility
 };
 
 export default facilityService;
