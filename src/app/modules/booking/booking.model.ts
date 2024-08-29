@@ -16,7 +16,7 @@ const bookingSchema = new Schema<TBooking>({
   },
   // user will be _id of User collection
   user: { type: mongoose.Schema.ObjectId, ref: "User" },
-});
+}, {timestamps: true});
 
 // creat model
 export const Booking = model<TBooking>("Booking", bookingSchema);

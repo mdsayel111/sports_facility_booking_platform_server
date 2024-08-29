@@ -56,7 +56,7 @@ class QueryBuilder<T> {
     // get page number from query
     const page = Number(this.query.page);
 
-    this.modelQuery.skip(10 * (page - 1)).limit(9);
+    this.modelQuery.skip(9 * (page - 1)).limit(9);
   }
 }
 

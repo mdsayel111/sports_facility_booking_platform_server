@@ -18,11 +18,11 @@ const getAllBookings = async () => {
 // get all bookings
 const getAllBookingsOfUser = async (userEmail: string) => {
   // get all bookings from DB
-  const user = await User.findOne({ email: userEmail }).sort({
-    createdAt: "desc",
-  });
+  const user = await User.findOne({ email: userEmail }).sort();
 
-  const bookings = await Booking.find({ user: user?._id }).populate("facility");
+  const bookings = await Booking.find({ user: user?._id }).sort({
+    createdAt: "desc",
+  }).populate("facility");
 
   return bookings;
 };
