@@ -132,7 +132,7 @@ const facilityControllers = {
   creatFacility,
   updateFacility,
   deleteFacility,
-  getLatestFacility
+  getLatestFacility,
 };
 
 export default facilityControllers;

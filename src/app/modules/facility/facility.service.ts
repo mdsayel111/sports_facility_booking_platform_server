@@ -12,11 +12,15 @@ const getAllFacility = async (query: Record<string, any>) => {
     query,
   );
 
-  facilityQueryModel.search(["name"]).sort("pricePerHour");
+  facilityQueryModel.search(["name"]).sort("pricePerHour").paginate();
 
   const documentCount = await facilityQueryModel.documentCount();
 
-  const facilities = await facilityQueryModel.modelQuery.sort({createdAt: "desc"});
+  const facilities = await facilityQueryModel.modelQuery.sort({
+    createdAt: "desc",
+  });
+
+  console.log(facilities)
 
   // if facility is null throw error
   if (!facilities) {
@@ -33,10 +37,11 @@ const getAllFacility = async (query: Record<string, any>) => {
   };
 };
 
-// get latest facility 
+// get latest facility
 const getLatestFacility = async () => {
-
-  const facilities = await Facility.find({}).sort({ createdAt: "desc" }).limit(4);
+  const facilities = await Facility.find({})
+    .sort({ createdAt: "desc" })
+    .limit(4);
 
   // if facility is null throw error
   if (!facilities) {
@@ -113,7 +118,7 @@ const facilityService = {
   creatFacility,
   updateFacility,
   deleteFacility,
-  getLatestFacility
+  getLatestFacility,
 };
 
 export default facilityService;
