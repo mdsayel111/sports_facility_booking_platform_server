@@ -20,8 +20,6 @@ const getAllFacility = async (query: Record<string, any>) => {
     createdAt: "desc",
   });
 
-  console.log(facilities)
-
   // if facility is null throw error
   if (!facilities) {
     throw new AppError(400, "Failed to get all facility");
@@ -41,7 +39,7 @@ const getAllFacility = async (query: Record<string, any>) => {
 const getLatestFacility = async () => {
   const facilities = await Facility.find({})
     .sort({ createdAt: "desc" })
-    .limit(4);
+    .limit(3);
 
   // if facility is null throw error
   if (!facilities) {
