@@ -15,17 +15,31 @@ class QueryBuilder<T> {
 
   // create search method for search data
   search(feilds: string[]) {
-    const searchObj: Record<string, object> = {};
+    const searchObj: Record<string, Record<string, object>[]> = { $or: [] };
 
     // check feild exist or not in query
     feilds.forEach((feild) => {
       // if feild exist in query, store it in feildExist
-      if (this.query[feild]) {
-        searchObj[feild] = { $regex: this.query[feild], $options: "i" };
+      if (this.query.search) {
+        searchObj.$or.push({ [feild]: { $regex: this.query.search, $options: "i" } });
       }
     });
 
-    this.modelQuery.find(searchObj as FilterQuery<T>);
+    // if serachObj.$or.length > 0, means search data exist, then search by search data, therwise get add data
+    this.modelQuery.find((searchObj.$or as []).length > 0 ? searchObj as FilterQuery<T> : {});
+
+    return this;
+  }
+
+  // create filter method for filter by pricePerHour
+  filter(feild: string) {
+    // if feild exist in query
+    if (this.query[feild]) {
+      const filterObj = {
+        [feild]: { $lte: Number(this.query[feild]) }
+      }
+      this.modelQuery.find(filterObj as FilterQuery<T>);
+    }
 
     return this;
   }

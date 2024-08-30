@@ -12,7 +12,7 @@ const getAllFacility = async (query: Record<string, any>) => {
     query,
   );
 
-  facilityQueryModel.search(["name"]).sort("pricePerHour").paginate();
+  facilityQueryModel.search(["name", "location"]).filter("pricePerHour").paginate();
 
   const documentCount = await facilityQueryModel.documentCount();
 
