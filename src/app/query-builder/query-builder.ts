@@ -21,12 +21,16 @@ class QueryBuilder<T> {
     feilds.forEach((feild) => {
       // if feild exist in query, store it in feildExist
       if (this.query.search) {
-        searchObj.$or.push({ [feild]: { $regex: this.query.search, $options: "i" } });
+        searchObj.$or.push({
+          [feild]: { $regex: this.query.search, $options: "i" },
+        });
       }
     });
 
     // if serachObj.$or.length > 0, means search data exist, then search by search data, therwise get add data
-    this.modelQuery.find((searchObj.$or as []).length > 0 ? searchObj as FilterQuery<T> : {});
+    this.modelQuery.find(
+      (searchObj.$or as []).length > 0 ? (searchObj as FilterQuery<T>) : {},
+    );
 
     return this;
   }
@@ -36,8 +40,8 @@ class QueryBuilder<T> {
     // if feild exist in query
     if (this.query[feild]) {
       const filterObj = {
-        [feild]: { $lte: Number(this.query[feild]) }
-      }
+        [feild]: { $lte: Number(this.query[feild]) },
+      };
       this.modelQuery.find(filterObj as FilterQuery<T>);
     }
 
